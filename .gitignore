@@ -2,3 +2,4 @@ dump/*
 !dump/readme
 public/*
 !public/readme
+node_modules/*

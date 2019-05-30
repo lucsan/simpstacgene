@@ -1,11 +1,14 @@
 {
-  "name": "engine",
+  "name": "simpstacgene",
   "version": "1.0.0",
   "description": "Simple Static Site Generator",
   "main": "engine.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine"
   },
   "author": "lucsan@zencorp.co.uk",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine": "^3.4.0"
+  }
 }
