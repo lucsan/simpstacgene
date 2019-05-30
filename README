@@ -1,6 +1,5 @@
-SimpStacGene
+***SimpStacGene***
 
 Simple Static Site Generator
 
-
-This is a node based site generator. It creates html files from templates.
+A node based site generator which creates html files from templates.
