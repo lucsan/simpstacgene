@@ -2,7 +2,10 @@
   "name": "simpstacgene",
   "version": "1.0.0",
   "description": "Simple Static Site Generator",
-  "main": "engine.js",
+  "main": "engine/engine.js",
+  "directories": {
+    "spec": "spec"
+  },
   "scripts": {
     "test": "jasmine"
   },
