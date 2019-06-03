@@ -48,13 +48,26 @@ const loadsFilesContents = (filesArray, doneCallback) => {
 
 const writesFile = (pagePath, pageHtml) => {
   fs.writeFile(pagePath, pageHtml, function (err) {
-    if (err) throw Error
+    if (err) console.log(err)
   })
 }
 
+const createsFolder = (path) => {
+  fs.mkdir(path, err => {
+    if (err) {
+      if (err.code == 'EEXIST') return
+      console.log(err)
+    }
+  })
+}
 
+const removesFolder = (path) => {
+  fs.rmdir(path, err => console.log(err) )
+}
 
 exports.findsRoot = findsRootDirectoryPath
 exports.walksDirectorys = walksDirectorys
 exports.loadsFilesContents = loadsFilesContents
 exports.writesFile = writesFile
+exports.createsFolder = createsFolder
+exports.removesFolder = removesFolder

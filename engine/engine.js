@@ -14,7 +14,7 @@ lfs.loadFiles(
   (filesData) => {
     ays.analyse(filesData)
     const pages = crt.creates(filesData)
-
+    fio.createsFolder(config.portalPath)
     pages.map(p => {
       let path = `${config.portalPath}\\${p.name}.html`
       fio.writesFile(path, p.html)
