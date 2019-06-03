@@ -1,5 +1,4 @@
 var crt = require('../engine/create')
-var dat = require('./stubAnalysisData')
 
 describe("Create", function() {
 
