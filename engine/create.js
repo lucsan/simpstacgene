@@ -10,9 +10,9 @@ const creates = (data) => {
 
 const createsPage = (fd, data) => {
   let html = ''
-  html = stripsInstructionsFromHtml(html)
   html = findsContainer(fd, data)
   html = fillsContainer(fd, html)
+  html = stripsInstructionsFromHtml(html)
   html = appliesTitle(fd, html)
   html = fillsSnippets(data, html)
   html = fillsContents(fd, data, html)
@@ -23,7 +23,9 @@ const stripsInstructionsFromHtml = (html) => {
   if (!html.includes('---')) return
   const ix = html.indexOf('---', html.indexOf('---') + 1)
   if (ix == -1) return
-  return html.substring(ix + 3, html.length)
+  const h1 = html.substring(0, html.indexOf('---'))
+  const h2 = html.substring(ix + 3, html.length)
+  return h1 + h2
 }
 
 const findsContainer = (fd, data) => {
