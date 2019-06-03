@@ -1,6 +1,6 @@
 function config () {
   return {
-    siteRoot: 'staticSite',
+    siteRoot: 'simpstacgene',
     htmlRoot: 'portal'
   }
 }

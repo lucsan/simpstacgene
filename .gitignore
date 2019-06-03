@@ -1,6 +1,5 @@
 dump/*
 !dump/readme
-public/*
-!public/readme
 portal/*
+!portal/readme
 node_modules/*
