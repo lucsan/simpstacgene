@@ -2,7 +2,7 @@ const creates = (data) => {
   let pages = []
   data.map(fd => {
     if (fd.page) {
-      pages.push({ name: fd.code, html: createsPage(fd, data) })
+      pages.push({ name: fd.page, html: createsPage(fd, data) })
     }
   })
   return pages
@@ -14,8 +14,8 @@ const createsPage = (fd, data) => {
   html = fillsContainer(fd, html)
   html = stripsInstructionsFromHtml(html)
   html = appliesTitle(fd, html)
-  html = fillsSnippets(data, html)
   html = fillsContents(fd, data, html)
+  html = fillsSnippets(data, html)
   return html
 }
 
@@ -39,8 +39,10 @@ const fillsContainer = (fd, html) => {
 }
 
 const fillsContents = (fd, data, html) => {
+  if (!fd.contains) return html
   let insertHtml = ''
-  let fs = data.filter(d => d.list == fd.code)
+  const containsDir = fd.contains.replace('data.', '')
+  let fs = data.filter(d => d.list == containsDir)
   fs.map(f => {
     insertHtml += f.data
   })
