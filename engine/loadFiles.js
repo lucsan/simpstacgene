@@ -15,7 +15,9 @@ const removesEngineFiles = (filesPathsList) => {
   let data = []
   filesPathsList.map(p => {
     if (p.includes('\\data\\')
-      || p.includes('\\templates\\')) {
+      || p.includes('\\templates\\')
+      && !p.includes('readme')
+    ) {
       data.push(p)
     }
   })
