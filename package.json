@@ -7,11 +7,15 @@
     "spec": "spec"
   },
   "scripts": {
-    "test": "jasmine"
+    "test": "jasmine",
+    "assets": "node engine\\npmMoveAssets.js",
+    "build": "node engine\\engine.js",
+    "less": "node .\\node_modules\\less\\bin\\lessc"
   },
   "author": "lucsan@zencorp.co.uk",
   "license": "ISC",
   "devDependencies": {
-    "jasmine": "^3.4.0"
+    "jasmine": "^3.4.0",
+    "less": "^3.9.0"
   }
 }

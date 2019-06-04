@@ -3,15 +3,8 @@ var cnf = require('../engine/config')
 
 describe("File IO", function() {
 
-  it('Gets the project root folder from the config file', () => {
-    let config = cnf.config()
-    const projectPath = fio.findsRoot(config.siteRoot)
-    expect(typeof(projectPath)).toBe('string')
-  })
-
   it('Gets a list of files in the engine folder', (done) => {
     let config = cnf.config()
-    config.projectPath = fio.findsRoot(config.siteRoot)
     const rootDir = `${config.projectPath}${config.siteRoot}\\engine`
 
     fio.walksDirectorys(
@@ -24,7 +17,6 @@ describe("File IO", function() {
 
   it('Loads files content as string into filesData array', (done) => {
     let config = cnf.config()
-    config.projectPath = fio.findsRoot(config.siteRoot)
     const rootDir = `${config.projectPath}${config.siteRoot}\\engine`
     const filePath = `${rootDir}\\engine.js`
 
@@ -34,13 +26,11 @@ describe("File IO", function() {
     })
   })
 
-  // it('Saves files to the htmlRoot folder in config (public, portal)', () => {
-  //   let config = cnf.config()
-  //   config.projectPath = fio.findsRoot(config.siteRoot)
-  //   let htmlDir = `${config.projectPath}${config.siteRoot}\\${config.htmlRoot}`
-  //
-  //   const html = '<html>test</html>'
-  //
-  //   expect('a').toBe('b')
-  // })
+  xit('Makes test files', () => {
+    const config = cnf.config()
+    const testRoot = `${config.projectPath}${config.siteRoot}\${config.testRoot}`
+    console.log(testRoot);
+
+    expect('a').toBe('b')
+  })
 })

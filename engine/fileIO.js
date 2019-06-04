@@ -1,15 +1,6 @@
 var fs = require('fs')
 var ph = require('path')
 
-const findsRootDirectoryPath = (rootName) => {
-  const pathOfThisFile = `${ph.dirname(require.main.filename)}`
-  if (pathOfThisFile.includes(rootName)) {
-    const path = pathOfThisFile.split(rootName)
-    return path[0]
-  }
-  return false
-}
-
 const walksDirectorys = (rootDir, doneCallback) => {
   const walks = (dir, doneCallback) => {
     let fils = []
@@ -52,22 +43,55 @@ const writesFile = (pagePath, pageHtml) => {
   })
 }
 
-const createsFolder = (path) => {
-  fs.mkdir(path, err => {
-    if (err) {
-      if (err.code == 'EEXIST') return
-      console.log(err)
-    }
+const writesFiles = (pagesArray, callback) => {
+  let pending = pagesArray.length
+  pagesArray.map(p => {
+    fs.writeFile(p.path, p.html, function (err) {
+      if (err) console.log(err)
+      if (!--pending) callback()
+    })
   })
+}
+
+const copysFiles = (pathsArray, callback) => {
+  let pending = pathsArray.length
+  pathsArray.map(ps => {
+    fs.copyFile(ps.src, ps.dst, err => {
+      if (err) console.log(err);
+      if (!--pending) callback()
+    })
+  })
+}
+
+const createsFolder = (path, callback) => {
+  createsFolders([path], callback)
+}
+
+const createsFolders = (paths, callback) => {
+  if (callback === undefined) callback = () => { return }
+  let pending = paths.length
+  paths.map(path => {
+    fs.mkdir(path, err => {
+      if (err) folderExists(err)
+      if (!--pending) callback()
+    })
+  })
+}
+
+const folderExists = (err) => {
+  if (err.code == 'EEXIST') return true
+  console.log(err)
+  return false
 }
 
 const removesFolder = (path) => {
   fs.rmdir(path, err => console.log(err) )
 }
 
-exports.findsRoot = findsRootDirectoryPath
 exports.walksDirectorys = walksDirectorys
 exports.loadsFilesContents = loadsFilesContents
 exports.writesFile = writesFile
 exports.createsFolder = createsFolder
+exports.createsFolders = createsFolders
 exports.removesFolder = removesFolder
+exports.copysFiles = copysFiles

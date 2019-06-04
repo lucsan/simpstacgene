@@ -5,9 +5,6 @@ var ays = require('./analyse')
 var crt = require('./create')
 
 let config = cnf.config()
-config.projectPath = fio.findsRoot(config.siteRoot)
-config.enginePath =  `${config.projectPath}${config.siteRoot}\\engine`
-config.portalPath = `${config.projectPath}${config.siteRoot}\\${config.htmlRoot}`
 
 lfs.loadFiles(
   config,
