@@ -2,22 +2,24 @@ var fs = require('fs')
 var ph = require('path')
 
 const walksDirectorys = (rootDir, doneCallback) => {
+  let dirs = []
   const walks = (dir, doneCallback) => {
     let fils = []
     fs.readdir(dir, (err, files) => {
       if (err) return doneCallback(err)
+      dirs.push(dir)
       let pending = files.length
-      if (!pending) return doneCallback(null, fils)
+      if (!pending) return doneCallback(null, fils, dirs)
       files.map(f => {
         fs.stat(ph.resolve(dir, f), (err, stat) => {
           if (stat && stat.isDirectory()) {
             walks(ph.resolve(dir, f), (err, res) => {
               fils = fils.concat(res)
-              if (!--pending) return doneCallback(null, fils)
+              if (!--pending) return doneCallback(null, fils, dirs)
             })
           } else {
             fils.push(ph.resolve(dir, f))
-            if (!--pending) return doneCallback(null, fils)
+            if (!--pending) return doneCallback(null, fils, dirs)
           }
         })
       })

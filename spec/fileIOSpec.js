@@ -9,8 +9,8 @@ describe("File IO", function() {
 
     fio.walksDirectorys(
       rootDir,
-      (msg, data) => {
-        expect(data.length > 0).toBe(true)
+      (msg, files, dirs) => {
+        expect(files.length > 0 && dirs.length > 0).toBe(true)
         done()
       })
   })

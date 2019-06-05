@@ -1,7 +1,16 @@
 var fio = require('./fileIO')
 
+
 const main = (config) => {
-  makesAssetsFolders(config, () => assetsFoldersReady(config))
+
+  looksForAssets(config, (assets) => {
+    makesAssetsFolders(config, assets, () => {
+      copysAssets(config, assets, () => {
+        console.log('Assets copied')
+      })
+    })
+  })
+
 }
 
 const assetsFoldersReady = (config) => {
@@ -10,43 +19,31 @@ const assetsFoldersReady = (config) => {
   })
 }
 
-const makesAssetsFolders = (config, callback) => {
-  let paths = []
-  paths.push(`${config.portalPath}\\css`)
-  paths.push(`${config.portalPath}\\images`)
-  if (config.imageFolders.length > 0) {
-    config.imageFolders.map(name => {
-      paths.push(`${config.portalPath}\\images\\${name}`)
-    })
-  }
+const looksForAssets = (config, callback) => {
+  let fils = []
+  fio.walksDirectorys(config.assetsPath, (msg, paths, dirs) => {
+    callback({ paths:paths, dirs: dirs })
+  })
+}
+
+const makesAssetsFolders = (config, assets, callback) => {
+  const paths = assets.dirs.map(p => {
+    const pathTail = p.substring(p.indexOf(config.assetsPath) + config.assetsPath.length, p.length)
+    return `${config.portalPath}${pathTail}`
+  })
   fio.createsFolders(paths, callback)
 }
 
-const copysAssets = (config, callback) => {
-  let fils = []
-  fio.walksDirectorys(config.assetsPath, (msg, paths) => {
-    let fips = filtersAssetsPaths(paths)
-    buildsCopyObjects(fips, config, callback)
+const copysAssets = (config, assets, callback) => {
+  const copyPaths = assets.paths.map(p => {
+    const pathTail = p.substring(p.indexOf(config.assetsPath) + config.assetsPath.length, p.length)
+    const portalPath = `${config.portalPath}${pathTail}`
+    return { src: p, dst: portalPath }
   })
-
-}
-
-const buildsCopyObjects = (fips, config, callback) => {
-  const fils = fips.map(f => {
-    const pathTail = f.substring(f.indexOf(config.assetsPath) + config.assetsPath.length, f.length)
-    const dest = `${config.portalPath}${pathTail}`
-    return { src: f, dst: dest }
-  })
-  fio.copysFiles(fils, callback)
-}
-
-const filtersAssetsPaths = (paths) => {
-  return paths.filter(f => {
-    if (f.includes('\\images\\')) return f
-    if (f.includes('\\css\\')) return f
-  })
+  fio.copysFiles(copyPaths, callback)
 }
 
 exports.main = main
 exports.makesAssetsFolders = makesAssetsFolders
 exports.copysAssets = copysAssets
+exports.looksForAssets = looksForAssets

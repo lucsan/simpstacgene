@@ -37,7 +37,7 @@ const identifysPageCodeFromPageName = (fd) => {
 
 const indentifysContainedListing = (fd) => {
   const pcs = fd.path.split('\\')
-  for (i = 0; i < pcs.length; i++) {
+  for (let i = 0; i < pcs.length; i++) {
     if (pcs[i] == 'data') {
       fd.list = pcs[i + 1]
       return

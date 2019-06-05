@@ -5,7 +5,8 @@ const defaultValues = () => {
     siteRoot: 'simpstacgene',
     htmlRoot: 'portal',
     testRoot: 'tests',
-    imageFolders: ['details', 'small',  'medium']
+    imageFolders: ['details', 'small',  'medium'],
+    assetFolderExcludes: ['less']
   }
 }
 
