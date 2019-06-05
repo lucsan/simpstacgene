@@ -2,16 +2,6 @@ var crt = require('../engine/create')
 
 describe("Create", function() {
 
-
-  // it('', () => {
-  //   let data = filesDataStub()
-  //   //crt.create(filesDataStub)
-  //
-  //   crt.createPage(data[4], data)
-  //
-  //   expect('a').toBe('b')
-  // })
-
   it('finds the page container html, or return the page html', () => {
     let data = filesDataStub()
     const html = crt.findsContainer(data[4], data)
@@ -81,7 +71,7 @@ const filesDataStub = () => {
       list: 'listings1',
       code: 'itemc' },
     { path: 'C:\\_builds\\projects\\edifices\\staticSite\\engine\\templates\\home_tpl.html',
-      data: '---\r\n  contained | default\r\n  page | home\r\n  title | Home Page\r\n---\r\n<div class="home">\r\n  Home\r\n\r\n  <div class="">\r\n    {{ itema }}\r\n  </div>\r\n\r\n  <div class="">\r\n    {{ snip1_snp }}\r\n  </div>\r\n\r\n\r\n</div>\r\n',
+      data: '---\r\n  contained | default\r\n  page | home\r\n  title | Home Page\r\n---\r\n<div class="home">\r\n  Home\r\n\r\n  <div class="">\r\n    {{ itema }}\r\n  </div>\r\n\r\n  <div class="">\r\n    {{ snip1_snp }}\r\n {{ snip1_snp }}\r\n {{ snip1_snp }}\r\n  </div>\r\n\r\n\r\n</div>\r\n',
       cmds: [ [Array], [Array], [Array] ],
       page: 'home',
       code: 'home',

@@ -57,7 +57,9 @@ const appliesTitle = (fd, html) => {
 
 const fillsSnippets = (data, html) => {
   data.map(fd => {
-    html = html.replace(`{{ ${fd.code} }}`, fd.data)
+    while (html.indexOf(`{{ ${fd.code} }}`) > -1) {
+      html = html.replace(`{{ ${fd.code} }}`, fd.data)
+    }
   })
   return html
 }
