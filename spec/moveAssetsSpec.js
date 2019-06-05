@@ -7,7 +7,6 @@ describe("moveAssets", function() {
   it('looks for assets', (done) => {
     let config = cnf.config()
     mas.looksForAssets(config, (assets) => {
-      console.log(assets);
       expect(assets.dirs.length > 0).toBe(true)
       done()
     })
