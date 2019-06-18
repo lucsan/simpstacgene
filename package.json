@@ -10,7 +10,7 @@
     "test": "jasmine",
     "assets": "node engine\\npmMoveAssets.js",
     "build": "node engine\\engine.js",
-    "less": "node .\\node_modules\\less\\bin\\lessc"
+    "less": "node .\\node_modules\\less\\bin\\lessc assets\\less\\base.less assets\\css\\base.css"
   },
   "author": "lucsan@zencorp.co.uk",
   "license": "ISC",
