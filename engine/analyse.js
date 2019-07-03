@@ -1,10 +1,19 @@
 
 const analyse = (data) => {
-  data.map(fd => extractsPageInstructions(fd))
-  data.map(fd => identifysPages(fd))
-  data.map(fd => identifysPageCodeFromPageName(fd))
-  data.map(fd => indentifysContainedListing(fd))
-//console.log(data);
+  console.log(`Analysing ${data.length} tpl assets`)
+  data.map(fd => {
+    identifysPageCodeFromPageName(fd)
+    extractsPageInstructions(fd)
+    identifysPages(fd)
+    indentifysContainedListing(fd)
+  })
+  // data.map(fd => identifysPageCodeFromPageName(fd))
+  // data.map(fd => extractsPageInstructions(fd))
+  // data.map(fd => identifysPages(fd))
+  // data.map(fd => indentifysContainedListing(fd))
+
+  //data.map(i => console.log('>>>>', i))
+
   return data
 }
 
@@ -15,6 +24,7 @@ const extractsPageInstructions = (file) => {
   const s = file.data.slice(3, ix).trim()
   const a = s.split('\r\n')
   file.cmds = a.map(c => c.split('|').map(i => i.trim()))
+  //console.log(`instructions found ${file.cmds}`)
 }
 
 const identifysPages = (file) => {
@@ -28,11 +38,13 @@ const identifysInstructionValueFromName = (file, name) => {
   if (!file.cmds) return
   const a = file.cmds.find(c => c[0] == name)
   if (a && a.length == 2) file[name] = a[1]
+  if (file[name]) console.log(`instructions found ${name} | ${file[name]}`)
 }
 
 const identifysPageCodeFromPageName = (fd) => {
   const a = fd.path.split('\\')
   fd.code = a[a.length - 1].replace('.html', '').replace('_tpl', '')
+  console.log(`Asset identified ${fd.code}`)
 }
 
 const indentifysContainedListing = (fd) => {
