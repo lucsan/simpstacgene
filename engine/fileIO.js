@@ -70,7 +70,7 @@ const createsFolder = (path, callback) => {
 }
 
 const createsFolders = (paths, callback) => {
-  if (callback === undefined) callback = () => { return }
+  //if (callback === undefined) callback = () => { return }
   let pending = paths.length
   paths.map(path => {
     fs.mkdir(path, err => {

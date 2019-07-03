@@ -11,12 +11,14 @@ const filtersFiles = (msg, filesPathsList) => {
   fio.loadsFilesContents(data, (filesData) => callback(filesData))
 }
 
+// TODO: refactor to use filter()
 const removesEngineFiles = (filesPathsList) => {
   let data = []
   filesPathsList.map(p => {
     if (p.includes('\\data\\')
       || p.includes('\\templates\\')
       && !p.includes('readme')
+      && !p.includes('README.md')
     ) {
       data.push(p)
     }
