@@ -1,95 +1,82 @@
 const creates = (data) => {
-  let pages = []
-  let d = data.filter(fd => {
-    return createsHTML(fd, data)
-  })
+  console.info(`Creating ${data.length} Assets`)
 
-  console.log(d.map(i => console.log(i)))
-console.log('unexpected end')
-return
+  data.map(fd => stripsInstructionsFromHtml(fd))
 
   data.map(fd => {
-    if (fd.page) {
-      pages.push({ name: fd.page, html: createsPage(fd, data) })
-    }
+    findsContainer(fd, data)
+    fillsContainer(fd)
+    fillsContents(fd, data)
   })
+
+  let pages = []
+  data.map(fd => {
+    if (!fd.page) return
+    appliesTitle(fd)
+    fillsSnippets(fd, data)
+    pages.push({ name: fd.page, html: fd.html})
+  })
+
+  console.info(`Created ${pages.length} pages.`)
+
   return pages
 }
 
-// TODO - strip isntructions from all pages before building output.
 /*
   Create can be a tad more sophisticated, so templates/snippets can contain
   listings (atm. only pages can)
 */
 
-const createsHTML = (fd, data) => {
-  console.log(fd)
-  //fd.html = fd.data
-  fd.html = findsContainer(fd, data)
-  console.log(fd)
-  fd.html = fillsContainer(fd, fd.html)
-  fd.html = stripsInstructionsFromHtml(fd.html)
-  return fd
+const fillsContents = (fd, data) => {
+  if (!fd.contains) return
+  const containsDir = fd.contains.replace('data.', '')
+  let fs = data.filter(d => d.list == containsDir)
+  let insertHtml = ''
+  fs.map(f => insertHtml += (!f.html)? f.data: f.html)
+  if (!fd.html) fd.html = fd.data
+  fd.html = fd.html.replace('{{ contains }}', insertHtml)
+}
+
+const fillsSnippets = (fd, data) => {
+  if (!fd.html) return
+  data.map(f => {
+    while (fd.html.indexOf(`{{ ${f.code} }}`) > -1) {
+      fd.html = fd.html.replace(`{{ ${f.code} }}`, (!f.html)? f.data: f.html)
+    }
+  })
+}
+
+const appliesTitle = (fd) => {
+  if (fd.title) fd.html = fd.html.replace('{{ title }}', fd.title)
 }
 
 const findsContainer = (fd, data) => {
-  if (!fd.contained) return fd.data
-  return data.find(d => d.code == fd.contained).data
+  if (!fd.contained) return
+  const container = data.find(d => d.code == fd.contained)
+  if (container) {
+    fd.html = container.data
+  } else {
+    console.log(`Error:- ${fd.contained}_tpl.html asset not found: ref:- ${fd.code}_tpl.html`)
+  }
 }
 
-const createsPage = (fd, data) => {
-  let html = ''
-  // html = findsContainer(fd, data)
-  // html = fillsContainer(fd, html)
-  // html = stripsInstructionsFromHtml(html)
-  html = appliesTitle(fd, html)
-  html = fillsContents(fd, data, html)
-  html = fillsSnippets(data, html)
-  return html
-}
-
-const stripsInstructionsFromHtml = (html) => {
-  if (!html.includes('---')) return
+const stripsInstructionsFromHtml = (fd) => {
+  if (!fd.data.includes('---')) return
+  let html = fd.data
   const ix = html.indexOf('---', html.indexOf('---') + 1)
   if (ix == -1) return
   const h1 = html.substring(0, html.indexOf('---'))
   const h2 = html.substring(ix + 3, html.length)
-  return h1 + h2
+  fd.data = h1 + h2
 }
 
-const fillsContainer = (fd, html) => {
-  if (!fd.contained) return html
-  return html.replace('{{ contains }}', fd.data)
-}
 
-const fillsContents = (fd, data, html) => {
-  if (!fd.contains) return html
-  let insertHtml = ''
-  const containsDir = fd.contains.replace('data.', '')
-  let fs = data.filter(d => d.list == containsDir)
-  fs.map(f => {
-    insertHtml += f.data
-  })
-  html = html.replace('{{ contains }}', insertHtml)
-  return html
-}
-
-const appliesTitle = (fd, html) => {
-  if (fd.title) html = html.replace('{{ title }}', fd.title)
-  return html
-}
-
-const fillsSnippets = (data, html) => {
-  data.map(fd => {
-    while (html.indexOf(`{{ ${fd.code} }}`) > -1) {
-      html = html.replace(`{{ ${fd.code} }}`, fd.data)
-    }
-  })
-  return html
+const fillsContainer = (fd) => {
+  if (!fd.contained) return
+  fd.html = fd.html.replace('{{ contains }}', fd.data)
 }
 
 exports.creates = creates
-exports.createsPage = createsPage
 exports.stripsInstructionsFromHtml = stripsInstructionsFromHtml
 exports.findsContainer = findsContainer
 exports.fillsContainer = fillsContainer

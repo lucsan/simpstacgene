@@ -11,7 +11,7 @@ lfs.loadFiles(
   (filesData) => {
     ays.analyse(filesData)
     const pages = crt.creates(filesData)
-    if (pages === undefined) return console.log('no pages created.')
+    if (pages === undefined) return console.error('no pages created.')
     fio.createsFolder(config.portalPath)
     pages.map(p => {
       let path = `${config.portalPath}\\${p.name}.html`
