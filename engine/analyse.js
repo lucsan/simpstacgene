@@ -1,18 +1,12 @@
 
 const analyse = (data) => {
-  console.info(`Analysing ${data.length} tpl assets`)
+  logIt(`Analysing ${data.length} tpl assets`)
   data.map(fd => {
     identifysPageCodeFromPageName(fd)
     extractsPageInstructions(fd)
     identifysPages(fd)
     indentifysContainedListing(fd)
   })
-  // data.map(fd => identifysPageCodeFromPageName(fd))
-  // data.map(fd => extractsPageInstructions(fd))
-  // data.map(fd => identifysPages(fd))
-  // data.map(fd => indentifysContainedListing(fd))
-
-  //data.map(i => console.log('>>>>', i))
 
   return data
 }

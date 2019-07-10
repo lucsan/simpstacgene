@@ -5,6 +5,7 @@ var ays = require('./analyse')
 var crt = require('./create')
 
 let config = cnf.config()
+global.logIt = msg => console.info(msg)
 
 lfs.loadFiles(
   config,

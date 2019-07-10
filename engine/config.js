@@ -14,9 +14,10 @@ const defaultValues = () => {
 function config () {
   let config = defaultValues()
   config.projectPath = findsRootDirectoryPath(config.siteRoot)
-  config.enginePath =  `${config.projectPath}${config.siteRoot}\\engine\\${config.partsRoot}`
+  config.enginePath =  `${config.projectPath}${config.siteRoot}\\engine`
+  config.piecesPath =  `${config.projectPath}${config.siteRoot}\\pieces\\${config.partsRoot}`
   config.portalPath = `${config.projectPath}${config.siteRoot}\\${config.htmlRoot}`
-  config.assetsPath = `${config.projectPath}${config.siteRoot}\\engine\\${config.partsRoot}\\assets`
+  config.assetsPath = `${config.projectPath}${config.siteRoot}\\pieces\\${config.partsRoot}\\assets`
   return config
 }
 

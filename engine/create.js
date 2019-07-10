@@ -1,5 +1,5 @@
 const creates = (data) => {
-  console.info(`Creating ${data.length} Assets`)
+  logIt(`Creating ${data.length} Assets`)
 
   data.map(fd => stripsInstructionsFromHtml(fd))
 
@@ -17,7 +17,7 @@ const creates = (data) => {
     pages.push({ name: fd.page, html: fd.html})
   })
 
-  console.info(`Created ${pages.length} pages.`)
+  logIt(`Created ${pages.length} pages.`)
 
   return pages
 }
@@ -56,7 +56,7 @@ const findsContainer = (fd, data) => {
   if (container) {
     fd.html = container.data
   } else {
-    console.log(`Error:- ${fd.contained}_tpl.html asset not found: ref:- ${fd.code}_tpl.html`)
+    logIt(`Error:- ${fd.contained}_tpl.html asset not found: ref:- ${fd.code}_tpl.html`)
   }
 }
 
