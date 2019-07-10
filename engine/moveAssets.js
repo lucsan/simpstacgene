@@ -4,9 +4,14 @@ var fio = require('./fileIO')
 const main = (config) => {
 
   looksForAssets(config, (assets) => {
+    if (assets.paths == undefined) {
+      console.info(`There are no assets at ${config.assetsPath}`)
+      return
+    }
+    console.log(assets)
     makesAssetsFolders(config, assets, () => {
       copysAssets(config, assets, () => {
-        console.log('Assets copied')
+        console.info('Assets copied')
       })
     })
   })
@@ -15,12 +20,12 @@ const main = (config) => {
 
 const assetsFoldersReady = (config) => {
   copysAssets(config, () => {
-    console.log('Assets copied')
+    console.info('Assets copied')
   })
 }
 
 const looksForAssets = (config, callback) => {
-  let fils = []
+  //let fils = []
   fio.walksDirectorys(config.assetsPath, (msg, paths, dirs) => {
     callback({ paths:paths, dirs: dirs })
   })
