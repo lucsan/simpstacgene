@@ -32,6 +32,9 @@
                 "selector": "CallExpression[callee.object.name='console'][callee.property.name!=/^(log|info|trace)$/]",
                 "message": "Unexpected property on console object was called"
             }
-        ]
+        ],
+        "globals": {
+          "logIt": "readonly"
+        }
     }
 }
