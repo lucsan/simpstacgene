@@ -5,7 +5,7 @@ describe("File IO", function() {
 
   it('Gets a list of files in the engine folder', (done) => {
     let config = cnf.config()
-    const rootDir = `${config.projectPath}${config.siteRoot}\\engine`
+    const rootDir = `${config.projectPath}\\engine`
 
     fio.walksDirectorys(
       rootDir,
@@ -17,7 +17,7 @@ describe("File IO", function() {
 
   it('Loads files content as string into filesData array', (done) => {
     let config = cnf.config()
-    const rootDir = `${config.projectPath}${config.siteRoot}\\engine`
+    const rootDir = `${config.projectPath}\\engine`
     const filePath = `${rootDir}\\engine.js`
 
     fio.loadsFilesContents([filePath], (filesData) => {
@@ -28,7 +28,7 @@ describe("File IO", function() {
 
   xit('Makes test files', () => {
     const config = cnf.config()
-    const testRoot = `${config.projectPath}${config.siteRoot}\${config.testRoot}`
+    const testRoot = `${config.projectPath}${config.testRoot}`
     console.log(testRoot);
 
     expect('a').toBe('b')

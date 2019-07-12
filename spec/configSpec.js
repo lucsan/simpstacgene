@@ -7,7 +7,7 @@ describe('Config', function() {
     expect(typeof(config.projectPath)).toBe('string')
   })
 
-  it('Creates relative project path, enginePath and portalPath', () => {
+  it('Creates relative project path, piecesPath and portalPath', () => {
     const config = cnf.config()
     expect(config.enginePath.includes('engine')).toBe(true)
   })

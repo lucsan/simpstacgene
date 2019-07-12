@@ -24,7 +24,7 @@ describe("moveAssets", function() {
 
   })
 
-  it('copysAssets', (done) => {
+  xit('copysAssets', (done) => {
     let config = cnf.config()
     mas.looksForAssets(config, (assets) => {
       mas.makesAssetsFolders(config, assets, () => {
@@ -34,9 +34,5 @@ describe("moveAssets", function() {
         })
       })
     })
-
-
-
-
   })
 })

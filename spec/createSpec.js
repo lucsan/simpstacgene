@@ -4,54 +4,54 @@ describe("Create", function() {
 
   it('finds the page container html, or return the page html', () => {
     let data = filesDataStub()
-    const html = crt.findsContainer(data[4], data)
-    expect(html).toBe(data[1].data)
+    let fd = data[4]
+    crt.findsContainer(fd, data)
+    expect(fd.html).toBe(data[1].data)
   })
 
   it('strips instructions from the html', () => {
     let data = filesDataStub()
-    let html = data[4].data
-    html = crt.stripsInstructionsFromHtml(html)
-    expect(html.includes('---')).toBe(false)
+    let fd = data[4]
+    crt.stripsInstructionsFromHtml(fd)
+    expect(fd.data.includes('---')).toBe(false)
   })
 
   it('fills the container html', () => {
     let data = filesDataStub()
-    let html = crt.findsContainer(data[4], data)
-    html = crt.fillsContainer(data[4], html)
-    expect(html.includes('<div class="home">')).toBe(true)
+    let fd = data[4]
+    crt.findsContainer(fd, data)
+    crt.fillsContainer(fd)
+    expect(fd.data.includes('<div class="home">')).toBe(true)
   })
 
   it('fills list containers with html from list item', () => {
     let data = filesDataStub()
     let fd = data[5]
-    let html = crt.findsContainer(fd, data)
-    html = crt.fillsContainer(fd, html)
-    html = crt.fillsContents(fd, data, html)
-    expect(html.includes('<div class="item">')).toBe(true)
+    crt.findsContainer(fd, data)
+    crt.fillsContainer(fd)
+    crt.fillsContents(fd, data)
+    expect(fd.html.includes('<div class="item">')).toBe(true)
   })
 
   it('applies a title', () => {
     let data = filesDataStub()
     let fd = data[4]
-    let html = crt.findsContainer(fd, data)
-    html = crt.fillsContainer(fd, html)
-    html = crt.appliesTitle(fd, html)
-    expect(html.includes('<title>Home Page</title>')).toBe(true)
+    crt.findsContainer(fd, data)
+    crt.fillsContainer(fd)
+    crt.appliesTitle(fd)
+    expect(fd.html.includes('<title>Home Page</title>')).toBe(true)
   })
 
   it('Fills snippet markup with snippets', () => {
     let data = filesDataStub()
     let fd = data[4]
-    let html = crt.findsContainer(fd, data)
-    html = crt.fillsContainer(fd, html)
-    html = crt.fillsSnippets(data, html)
-    expect(html.includes('<div class="snip">')).toBe(true)
+    crt.findsContainer(fd, data)
+    crt.fillsContainer(fd)
+    crt.fillsSnippets(data)
+    expect(fd.html.includes('<div class="snip">')).toBe(true)
   })
 
-
 })
-
 
 const filesDataStub = () => {
   return [
