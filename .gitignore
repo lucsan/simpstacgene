@@ -1,8 +1,9 @@
-dump/*
-!dump/readme
+_dump/*
 portal*/*
 !portal/readme
 node_modules/*
 materials/*
 !materials/demo
 !materials/test
+mikeedwards/*
+build/*

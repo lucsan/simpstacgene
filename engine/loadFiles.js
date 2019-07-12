@@ -2,9 +2,9 @@ var fio = require('./fileIO')
 var callback
 
 const main = (config, doneCallback) => {
-  logIt(`Checking folder: pieces/${config.partsRoot}`)
+  logIt(`Checking folder: pieces/${config.materialsRoot}/templates`)
   callback = doneCallback
-  fio.walksDirectorys(config.piecesPath, filtersFiles)
+  fio.walksDirectorys(config.materialsPath, filtersFiles)
 }
 
 const filtersFiles = (msg, filesPathsList) => {

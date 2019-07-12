@@ -4,7 +4,7 @@ var fio = require('./fileIO')
 const main = (config) => {
 
   looksForAssets(config, (assets) => {
-    if (assets.paths == undefined) {
+    if (assets.paths == undefined || assets.paths.length < 1) {
       console.info(`There are no assets at ${config.assetsPath}`)
       return
     }
