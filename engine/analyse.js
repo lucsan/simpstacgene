@@ -7,7 +7,6 @@ const analyse = (data) => {
     identifysPages(fd)
     indentifysContainedListing(fd)
   })
-
   return data
 }
 
@@ -18,7 +17,6 @@ const extractsPageInstructions = (file) => {
   const s = file.data.slice(3, ix).trim()
   const a = s.split('\r\n')
   file.cmds = a.map(c => c.split('|').map(i => i.trim()))
-  //console.log(`instructions found ${file.cmds}`)
 }
 
 const identifysPages = (file) => {

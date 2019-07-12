@@ -1,6 +1,5 @@
 var fio = require('./fileIO')
 
-
 const main = (config) => {
 
   looksForAssets(config, (assets) => {
@@ -25,7 +24,6 @@ const assetsFoldersReady = (config) => {
 }
 
 const looksForAssets = (config, callback) => {
-  //let fils = []
   fio.walksDirectorys(config.assetsPath, (msg, paths, dirs) => {
     callback({ paths:paths, dirs: dirs })
   })
