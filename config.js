@@ -1,6 +1,9 @@
+// To use this override config put it in your project root folder.
 exports.values = () => {
   return {
-    siteRoot: 'simpstacgene',  // 'your_project_folder',
-    nodeRoot: '',  // 'node_modules\\simpstacgene\\',
+    htmlRoot: 'portal',
+    materialsRoot: 'demo',
+    assetsRoot: 'assets',
+    assetFolderExcludes: ['less']
   }
 }

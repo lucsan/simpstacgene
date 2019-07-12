@@ -3,8 +3,9 @@ var ph = require('path')
 const defaultValues = () => {
   return {
     htmlRoot: 'portal',
-    testRoot: 'tests',
     materialsRoot: 'demo',
+    assetsRoot: 'assets',
+    testRoot: 'tests',
     imageFolders: ['details', 'small',  'medium'],
     assetFolderExcludes: ['less']
   }
@@ -12,23 +13,40 @@ const defaultValues = () => {
 
 function config () {
   let config = defaultValues()
-  const rootConfig = require(
-    `${ph.dirname(require.main.filename)}`
-      .replace('\\engine', '\\config.js')
-  ).values()
 
-  config.projectPath = findsRootDirectoryPath(rootConfig.siteRoot)
-  config.enginePath =  `${config.projectPath}${config.nodeRoot}${rootConfig.siteRoot}\\engine`
-  config.materialsPath =  `${config.projectPath}${rootConfig.siteRoot}\\${config.materialsRoot}`
-  config.portalPath = `${config.projectPath}${rootConfig.siteRoot}\\${config.htmlRoot}`
-  config.assetsPath = `${config.projectPath}${rootConfig.siteRoot}\\${config.materialsRoot}\\assets`
+  const thisFileLoc = ph.dirname(require.main.filename)
+  if (thisFileLoc.indexOf('node_modules') > -1) {
+    config.projectPath = thisFileLoc.split('node_modules')[0]
+    config.enginePath = `${config.projectPath}node_modules\\simpstacgene\\engine`
+    config.materialsPath = `${config.projectPath}`
+  } else {
+    config.projectPath = thisFileLoc.replace('\\engine', '')
+    config.enginePath = thisFileLoc
+    config.materialsPath = `${config.projectPath}\\${config.materialsRoot}`
+  }
+
+  try {
+    const rootConfig = require(`${config.projectPath}\\config.js`).values()
+    if (rootConfig.materialsRoot) config.materialsPath = `${config.projectPath}\\${rootConfig.materialsRoot}`
+    if (rootConfig.htmlRoot) config.portalPath = `${config.projectPath}\\${rootConfig.htmlRoot}`
+    if (rootConfig.assetsRoot) config.assetsPath = `${config.materialsPath}\\${rootConfig.assetsRoot}`
+    if (rootConfig.assetFolderExcludes) config.assetFolderExcludes = rootConfig.assetFolderExcludes        
+  } catch(err) { logIt('No root config found, using defaults.') }
+
+  config.assetsPath = `${config.materialsPath}\\assets`
+  config.portalPath = `${config.projectPath}\\${config.htmlRoot}`
+
+  console.log(config)
   return config
 }
 
 const findsRootDirectoryPath = (rootName) => {
+  console.log('rn', rootName)
   const pathOfThisFile = `${ph.dirname(require.main.filename)}`
+  console.log('potf', pathOfThisFile)
   if (pathOfThisFile.includes(rootName)) {
     const path = pathOfThisFile.split(rootName)
+    console.log(path)
     return path[0]
   }
   return false
