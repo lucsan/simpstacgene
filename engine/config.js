@@ -5,7 +5,7 @@ const defaultValues = () => {
     siteRoot: 'simpstacgene',
     htmlRoot: 'portal',
     testRoot: 'tests',
-    partsRoot: 'demo',
+    partsRoot: 'build',
     imageFolders: ['details', 'small',  'medium'],
     assetFolderExcludes: ['less']
   }
@@ -15,9 +15,9 @@ function config () {
   let config = defaultValues()
   config.projectPath = findsRootDirectoryPath(config.siteRoot)
   config.enginePath =  `${config.projectPath}${config.siteRoot}\\engine`
-  config.piecesPath =  `${config.projectPath}${config.siteRoot}\\pieces\\${config.partsRoot}`
+  config.piecesPath =  `${config.projectPath}${config.siteRoot}\\materials\\${config.partsRoot}\\templates`
   config.portalPath = `${config.projectPath}${config.siteRoot}\\${config.htmlRoot}`
-  config.assetsPath = `${config.projectPath}${config.siteRoot}\\pieces\\${config.partsRoot}\\assets`
+  config.assetsPath = `${config.projectPath}${config.siteRoot}\\materials\\${config.partsRoot}\\assets`
   return config
 }
 

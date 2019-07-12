@@ -3,3 +3,6 @@ dump/*
 portal*/*
 !portal/readme
 node_modules/*
+materials/*
+!materials/demo
+!materials/test
