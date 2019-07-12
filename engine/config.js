@@ -11,7 +11,7 @@ const defaultValues = () => {
   }
 }
 
-function config () {
+function config() {
   let config = defaultValues()
 
   const thisFileLoc = ph.dirname(require.main.filename)
@@ -30,13 +30,12 @@ function config () {
     if (rootConfig.materialsRoot) config.materialsPath = `${config.projectPath}\\${rootConfig.materialsRoot}`
     if (rootConfig.htmlRoot) config.portalPath = `${config.projectPath}\\${rootConfig.htmlRoot}`
     if (rootConfig.assetsRoot) config.assetsPath = `${config.materialsPath}\\${rootConfig.assetsRoot}`
-    if (rootConfig.assetFolderExcludes) config.assetFolderExcludes = rootConfig.assetFolderExcludes        
+    if (rootConfig.assetFolderExcludes) config.assetFolderExcludes = rootConfig.assetFolderExcludes
   } catch(err) { logIt('No root config found, using defaults.') }
 
   config.assetsPath = `${config.materialsPath}\\assets`
   config.portalPath = `${config.projectPath}\\${config.htmlRoot}`
 
-  console.log(config)
   return config
 }
 

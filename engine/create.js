@@ -70,7 +70,6 @@ const stripsInstructionsFromHtml = (fd) => {
   fd.data = h1 + h2
 }
 
-
 const fillsContainer = (fd) => {
   if (!fd.contained) return
   fd.html = fd.html.replace('{{ contains }}', fd.data)

@@ -4,8 +4,8 @@ var lfs = require('./loadFiles')
 var ays = require('./analyse')
 var crt = require('./create')
 
-let config = cnf.config()
 global.logIt = msg => console.info(msg)
+let config = cnf.config()
 
 lfs.loadFiles(
   config,
@@ -19,5 +19,3 @@ lfs.loadFiles(
       fio.writesFile(path, p.html)
     })
   })
-
-  const debrief = () => {}
