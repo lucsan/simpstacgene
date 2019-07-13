@@ -18,6 +18,8 @@ This will install simpstacgene in the node_modules folder and create a config.js
 
 You should create a `templates` and an `assets` folder in the root of your project. You can copy these from `node_modules/simpstacgene/demo` if you like _(it's a very good place to begin)_.
 
+You can then use `node node_modules\\simpstacgene\\engine\\engine.js` to build the site files, and `node node_modules\\simpstacgene\\engine\\copyAssets.js` to add your assets (css, images, etc) to the web root.
+
 The `📂demo` folder contains simple examples of how the templates work.
 
 Your site components are organized into __3__ main folders: `templates`, `data`, and `assets` (snips is just an organizational folder which we will come to in due course).
@@ -96,7 +98,7 @@ You can add the following to the scripts section of package.json and use `npm ru
 
 ```javascript
 "build":  "node node_modules\\simpstacgene\\engine\\engine.js",
-"assets": "node node_modules\\simpstacgene\\engine\\npmMoveAssets.js",
+"assets": "node node_modules\\simpstacgene\\engine\\copyAssets.js",
 ```
 
 ## 🛠 In development mode
@@ -104,7 +106,7 @@ You can add the following to the scripts section of package.json and use `npm ru
 
 🏃‍ to run use: `node engine/engine.js` - in the project root folder to build.
 
-🏃‍ to load assets to the portal use: `node engine/npmMoveAssets.js` - in the project root folder to build.
+🏃‍ to load assets to the portal use: `node engine/copyAssets.js` - in the project root folder to build.
 
 🏃‍ Run tests use: `npm test` - in the project root folder.
 
