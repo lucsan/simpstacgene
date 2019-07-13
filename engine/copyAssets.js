@@ -1,4 +1,7 @@
 var fio = require('./fileIO')
+var cnf = require('./config')
+
+const config = cnf.config()
 
 const main = (config) => {
 
@@ -46,7 +49,9 @@ const copysAssets = (config, assets, callback) => {
   fio.copysFiles(copyPaths, callback)
 }
 
-exports.main = main
+main(config)
+
+//exports.main = main
 exports.makesAssetsFolders = makesAssetsFolders
 exports.copysAssets = copysAssets
 exports.looksForAssets = looksForAssets

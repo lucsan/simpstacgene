@@ -6,7 +6,6 @@ const defaultValues = () => {
     materialsRoot: 'demo',
     assetsRoot: 'assets',
     testRoot: 'tests',
-    imageFolders: ['details', 'small',  'medium'],
     assetFolderExcludes: ['less']
   }
 }
