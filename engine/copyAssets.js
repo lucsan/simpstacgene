@@ -8,7 +8,6 @@ const config = cnf.config()
 const main = (config) => {
 
   looksForAssets(config, (assets) => {
-    //console.log('assets', assets)
     if (assets.paths == undefined || assets.paths.length < 1) {
       logIt(`There are no assets at ${config.assetsPath}`)
       return
@@ -22,15 +21,8 @@ const main = (config) => {
   })
 }
 
-const assetsFoldersReady = (config) => {
-  copysAssets(config, () => {
-    logIt('Assets copied')
-  })
-}
-
 const looksForAssets = (config, callback) => {
   fio.walksDirectorys(config.assetsPath, (msg, paths, dirs) => {
-    console.log()
     callback({ paths:paths, dirs: dirs })
   })
 }
@@ -38,7 +30,7 @@ const looksForAssets = (config, callback) => {
 const makesAssetsFolders = (config, assets, callback) => {
   const paths = assets.dirs.map(p => {
     const pathTail = p.substring(p.indexOf(config.assetsPath) + config.assetsPath.length, p.length)
-    return `${config.portalPath}${pathTail}`
+    return `${config.portalPath}${pathTail}/`
   })
   fio.createsFolders(paths, callback)
 }
