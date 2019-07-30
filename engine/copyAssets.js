@@ -1,28 +1,28 @@
 var fio = require('./fileIO')
 var cnf = require('./config')
 
+global.logIt = msg => console.info(msg)
 const config = cnf.config()
 
 const main = (config) => {
 
   looksForAssets(config, (assets) => {
     if (assets.paths == undefined || assets.paths.length < 1) {
-      console.info(`There are no assets at ${config.assetsPath}`)
+      logIt(`There are no assets at ${config.assetsPath}`)
       return
     }
     console.log(assets)
     makesAssetsFolders(config, assets, () => {
       copysAssets(config, assets, () => {
-        console.info('Assets copied')
+        logIt('Assets copied')
       })
     })
   })
-
 }
 
 const assetsFoldersReady = (config) => {
   copysAssets(config, () => {
-    console.info('Assets copied')
+    logIt('Assets copied')
   })
 }
 
@@ -51,7 +51,6 @@ const copysAssets = (config, assets, callback) => {
 
 main(config)
 
-//exports.main = main
 exports.makesAssetsFolders = makesAssetsFolders
 exports.copysAssets = copysAssets
 exports.looksForAssets = looksForAssets
