@@ -22,7 +22,7 @@ const extractsPageInstructions = (fd) => {
   const ix = fd.data.indexOf('---', fd.data.indexOf('---') + 1)
   if (ix == -1) return
   const s = fd.data.slice(3, ix).trim()
-  const a = s.split('\r\n')
+  const a = s.split('\n')
   fd.cmds = a.map(c => c.split('|').map(i => i.trim()))
 }
 
