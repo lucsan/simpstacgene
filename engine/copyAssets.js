@@ -1,7 +1,8 @@
+global.logIt = msg => console.info(msg)
+
 var fio = require('./fileIO')
 var cnf = require('./config')
 
-global.logIt = msg => console.info(msg)
 const config = cnf.config()
 
 const main = (config) => {

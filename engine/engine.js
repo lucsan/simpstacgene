@@ -1,10 +1,11 @@
+global.logIt = msg => console.info(msg)
+
 var cnf = require('./config')
 var fio = require('./fileIO')
 var lfs = require('./loadFiles')
 var ays = require('./analyse')
 var crt = require('./create')
 
-global.logIt = msg => console.info(msg)
 let config = cnf.config()
 
 lfs.loadFiles(
