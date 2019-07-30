@@ -30,7 +30,7 @@ function config() {
     if (rootConfig.htmlRoot) config.portalPath = `${config.projectPath}\\${rootConfig.htmlRoot}`
     if (rootConfig.assetsRoot) config.assetsPath = `${config.materialsPath}\\${rootConfig.assetsRoot}`
     if (rootConfig.assetFolderExcludes) config.assetFolderExcludes = rootConfig.assetFolderExcludes
-  } catch(err) { logIt('No root config found, using defaults.') }
+  } catch(err) { logIt('No root config found, using defaults.', err, config.projectPath) }
 
   config.assetsPath = `${config.materialsPath}\\assets`
   config.portalPath = `${config.projectPath}\\${config.htmlRoot}`
