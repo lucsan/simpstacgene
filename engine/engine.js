@@ -8,8 +8,6 @@ var crt = require('./create')
 
 let config = cnf.config()
 
-console.log(config)
-
 lfs.loadFiles(
   config,
   (filesData) => {
@@ -18,7 +16,7 @@ lfs.loadFiles(
     if (pages === undefined) return console.error('no pages created.')
     fio.createsFolder(config.portalPath)
     pages.map(p => {
-      let path = `${config.portalPath}\\${p.name}.html`
+      let path = `${config.portalPath}${p.name}.html`
       fio.writesFile(path, p.html)
     })
   })

@@ -8,7 +8,8 @@ const main = (config, doneCallback) => {
 }
 
 const filtersFiles = (msg, filesPathsList) => {
-  const data = removesEngineFiles(filesPathsList)
+  const fpl = filesPathsList.map(f => f.replace(/\\/g, '/'))
+  const data = removesEngineFiles(fpl)
   fio.loadsFilesContents(data, (filesData) => callback(filesData))
 }
 
@@ -16,8 +17,8 @@ const filtersFiles = (msg, filesPathsList) => {
 const removesEngineFiles = (filesPathsList) => {
   let data = []
   filesPathsList.map(p => {
-    if (p.includes('\\data\\')
-      || p.includes('\\templates\\')
+    if (p.includes('/data/')
+      || p.includes('/templates/')
       && !p.includes('readme')
       && !p.includes('README.md')
     ) {

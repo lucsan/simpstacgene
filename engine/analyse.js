@@ -41,13 +41,13 @@ const identifysInstructionValueFromName = (fd, name) => {
 }
 
 const identifysPageCodeFromPageName = (fd) => {
-  const a = fd.path.split('\\')
+  const a = fd.path.split('/')
   fd.code = a[a.length - 1].replace('.html', '').replace('_tpl', '')
   console.info(`Asset identified: ${fd.code}`)
 }
 
 const indentifysContainedListing = (fd) => {
-  const pcs = fd.path.split('\\')
+  const pcs = fd.path.split('/')
   for (let i = 0; i < pcs.length; i++) {
     if (pcs[i] == 'data') {
       fd.list = pcs[i + 1]
