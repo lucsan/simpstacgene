@@ -14,6 +14,8 @@ _(so you've decided to build a static website, yay, ✨)_
 
 _use_ `npm install --save lucsan/simpstacgene#master`
 
+or clone the pre-constructed build mode from git https://github.com/lucsan/siteBuilder
+
 This will install simpstacgene in the node_modules folder and create a config.js in the root of your project.
 
 You should create a `templates` and an `assets` folder in the root of your project. You can copy these from `node_modules/simpstacgene/demo` if you like _(it's a very good place to begin)_.

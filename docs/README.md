@@ -8,13 +8,13 @@ The compiler creates the site pages in memory from the data, templates files and
 
 Once the site is _constructed_ the pages and any assets in the assets folder are copied into the portal folder.
 
-Thus any site supproting files (css, browser js, images etc), should be in the assets folder ready to be copied over to the portal.
+Thus any site supporting files (css, browser js, images etc), should be in the assets folder ready to be copied over to the portal.
 
 The portal is, of course, the web root folder from which the site is served.
 
-First the file stack is read from enginePath (which is created by config.js)
+First the file stack is read from piecesPath (which is created by config.js)
 
-config.enginePath =  `${config.projectPath}${config.siteRoot}\\engine`
+config.piecesPath =  `${config.projectPath}${config.siteRoot}\\engine`
 
 Non-data files are removed, leaving files found in templates and data folders.
 
