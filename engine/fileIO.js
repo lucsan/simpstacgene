@@ -90,6 +90,13 @@ const removesFolder = (path) => {
   fs.rmdir(path, err => console.log(err) )
 }
 
+const fileExists = (path, callback) => {
+  fs.access(path, fs.constants.F_OK, (err) => {
+    if (err) return callback(false)
+    return callback(true)
+  })
+}
+
 exports.walksDirectorys = walksDirectorys
 exports.loadsFilesContents = loadsFilesContents
 exports.writesFile = writesFile
@@ -97,3 +104,4 @@ exports.createsFolder = createsFolder
 exports.createsFolders = createsFolders
 exports.removesFolder = removesFolder
 exports.copysFiles = copysFiles
+exports.fileExists = fileExists

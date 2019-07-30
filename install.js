@@ -5,12 +5,18 @@ var fio = require('./engine/fileIO')
 
 global.logIt = msg => console.info(msg)
 const config = cnf.config()
+fio.fileExists(`${config.projectPath}/config.js`, (err) => {
+  if (!err) return writeDefaultConfig()
+})
 
-fio.writesFile(`${config.projectPath}config.js`,
+const writeDefaultConfig = () => {
+  fio.writesFile(`${config.projectPath}/config.js`,
 `exports.values = () => {
   return {
+    materialsRoot: 'demo',
     htmlRoot: 'portal',
     assetsRoot: 'assets',
     assetFolderExcludes: ['less']
   }
 }`)
+}
