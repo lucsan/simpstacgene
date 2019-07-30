@@ -9,6 +9,8 @@ const creates = (data) => {
     fillsContents(fd, data)
   })
 
+  data.map(d => { if (d.code == 'test_inc') console.log(d)})
+
   let pages = []
   data.map(fd => {
     if (!fd.page) return
@@ -26,6 +28,10 @@ const creates = (data) => {
   Create can be a tad more sophisticated, so templates/snippets can contain
   listings (atm. only pages can)
 */
+
+const fillsTemplatesContents = (fd, data) => {
+
+}
 
 const fillsContents = (fd, data) => {
   if (!fd.contains) return

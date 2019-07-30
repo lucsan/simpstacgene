@@ -6,7 +6,7 @@ const defaultValues = () => {
     materialsRoot: 'demo',
     assetsRoot: 'assets',
     testRoot: 'tests',
-    assetFolderExcludes: ['less']
+    assetFolderExcludes: ['less'] // TODO: implement this.
   }
 }
 

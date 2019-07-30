@@ -6,31 +6,38 @@ const analyse = (data) => {
     extractsPageInstructions(fd)
     identifysPages(fd)
     indentifysContainedListing(fd)
+    identifysContainedTemplate(fd)
   })
+  //data.map(d => {if(d.code == 'test') console.log(d)})
   return data
 }
 
-const extractsPageInstructions = (file) => {
-  if (!file.data.includes('---')) return
-  const ix = file.data.indexOf('---', file.data.indexOf('---') + 1)
+const identifysContainedTemplate = (fd) => {
+  if (!fd.contained) return
+  console.log('contained', fd.code)
+}
+
+const extractsPageInstructions = (fd) => {
+  if (!fd.data.includes('---')) return
+  const ix = fd.data.indexOf('---', fd.data.indexOf('---') + 1)
   if (ix == -1) return
-  const s = file.data.slice(3, ix).trim()
+  const s = fd.data.slice(3, ix).trim()
   const a = s.split('\r\n')
-  file.cmds = a.map(c => c.split('|').map(i => i.trim()))
+  fd.cmds = a.map(c => c.split('|').map(i => i.trim()))
 }
 
-const identifysPages = (file) => {
-  identifysInstructionValueFromName(file, 'page')
-  identifysInstructionValueFromName(file, 'title')
-  identifysInstructionValueFromName(file, 'contained')
-  identifysInstructionValueFromName(file, 'contains')
+const identifysPages = (fd) => {
+  identifysInstructionValueFromName(fd, 'page')
+  identifysInstructionValueFromName(fd, 'title')
+  identifysInstructionValueFromName(fd, 'contained')
+  identifysInstructionValueFromName(fd, 'contains')
 }
 
-const identifysInstructionValueFromName = (file, name) => {
-  if (!file.cmds) return
-  const a = file.cmds.find(c => c[0] == name)
-  if (a && a.length == 2) file[name] = a[1]
-  if (file[name]) console.info(`instructions found: ${name} | ${file[name]}`)
+const identifysInstructionValueFromName = (fd, name) => {
+  if (!fd.cmds) return
+  const a = fd.cmds.find(c => c[0] == name)
+  if (a && a.length == 2) fd[name] = a[1]
+  if (fd[name]) console.info(`instructions found: ${name} | ${fd[name]}`)
 }
 
 const identifysPageCodeFromPageName = (fd) => {
