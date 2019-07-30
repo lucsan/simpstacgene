@@ -8,6 +8,8 @@ var crt = require('./create')
 
 let config = cnf.config()
 
+console.log(config)
+
 lfs.loadFiles(
   config,
   (filesData) => {

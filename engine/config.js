@@ -26,9 +26,19 @@ function config() {
 
   try {
     const rootConfig = require(`${config.projectPath}\\config.js`).values()
-    if (rootConfig.materialsRoot) config.materialsPath = `${config.projectPath}\\${rootConfig.materialsRoot}`
-    if (rootConfig.htmlRoot) config.portalPath = `${config.projectPath}\\${rootConfig.htmlRoot}`
-    if (rootConfig.assetsRoot) config.assetsPath = `${config.materialsPath}\\${rootConfig.assetsRoot}`
+    if (rootConfig.materialsRoot) {
+      config.materialsRoot = rootConfig.materialsRoot
+      config.materialsPath = `${config.projectPath}\\${rootConfig.materialsRoot}`
+    }
+
+    if (rootConfig.htmlRoot) {
+      config.htmlRoot = rootConfig.htmlRoot
+      config.portalPath = `${config.projectPath}\\${rootConfig.htmlRoot}`
+    }
+    if (rootConfig.assetsRoot) {
+      config.assetsRoot = rootConfig.assetsRoot
+      config.assetsPath = `${config.materialsPath}\\${rootConfig.assetsRoot}`
+    }
     if (rootConfig.assetFolderExcludes) config.assetFolderExcludes = rootConfig.assetFolderExcludes
   } catch(err) { logIt('No root config found, using defaults.', err, config.projectPath) }
 
